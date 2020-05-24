@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dialog, DialogContent, DialogActions, Button, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
-import { SwatchesPicker } from 'react-color';
+import { SketchPicker } from 'react-color';
 
 const useStyle = makeStyles((theme) => ({
 
@@ -14,7 +14,7 @@ const ColorsModal = (props) => {
     return (
         <Dialog open={open}>
             <DialogContent>
-                <SwatchesPicker onChangeComplete={handleColorChnage} />
+                <SketchPicker onChangeComplete={handleColorChnage} />
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleClose}>CLOSE</Button>

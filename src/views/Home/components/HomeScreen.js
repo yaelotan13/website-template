@@ -95,7 +95,7 @@ const HomeScreen = (props) => {
     const classes = useStyle();
     const [avatarImagePreview, setAvatarImagePreview] = useState(null);
     const [avatarImage, setAvatarImage] = useState(null);
-    const [backgroundColor, setBackgroundColor] = useState('#00bcd4');
+    const [backgroundColor, setBackgroundColor] = useState('#2a3653');
     const [mainHeader, setMainHeader] = useState('Your Main Header');
     const [subHeader, setSubHeader] = useState('A short cool description about you.. ');
     const [openEditModel, setOpenEditModel] = useState(false);
