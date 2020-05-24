@@ -6,10 +6,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Link } from 'react-scroll';
 import { SwatchesPicker } from 'react-color';
 
-import { Icon, Modal } from '../../../components';
-import upload from '../../../assets/icons/upload.png';
-import edit from '../../../assets/icons/edit.png';
-import yael from '../../../assets/images/me1.jpg';
+import { Modal, ActionButton } from '../../../components';
 
 const useStyle = makeStyles((theme) => ({
     container: {
@@ -67,10 +64,6 @@ const useStyle = makeStyles((theme) => ({
             fontWeight: theme.typography.h5.fontWeight,
             fontSize: '12px',
         }
-    },
-    editButton: {
-        marginTop: '5vh',
-        backgroundColor: theme.palette.secondary.main
     },
     icon: {
         marginTop: '15vh',
@@ -164,9 +157,7 @@ const HomeScreen = (props) => {
                         </ScrollAnimation>
                     </Box>          
                 </Box>
-                <Button variant="contained" className={classes.editButton} onClick={() =>  setOpenEditModel(true)}>
-                    <Icon icon={edit} text="Edit Header"/>
-                </Button>
+                <ActionButton actionType="edit" handleClicked={() =>  setOpenEditModel(true)} />
                 <ScrollAnimation
                     animateIn='fadeInDown'
                     delay={2500}
