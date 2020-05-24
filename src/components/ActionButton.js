@@ -8,21 +8,22 @@ import plus from '../assets/icons/plus.png';
 
 const useStyle = makeStyles((theme) => ({
     button: {
-        marginTop: '5vh',
-        backgroundColor: theme.palette.secondary.main
+        paddingRight: 30,
+        paddingTop: 2,
+        paddingBottom: 2
     },
 }));
 
 const ActionButton = (props) => {
     const classes = useStyle();
-    const { actionType, handleClicked } = props;
+    const { actionType, handleClicked, style, title } = props;
 
     return (
-        <Button variant="contained" className={classes.button} onClick={handleClicked}>
+        <Button variant={style} className={classes.button} onClick={handleClicked} color="secondary">
             {actionType === 'edit' ?
-                <Icon icon={edit} text="Edit"/>
+                <Icon icon={edit} text={`Edit ${title}`}/>
                 :
-                <Icon icon={plus} text="Add"/>
+                <Icon icon={plus} text={`Add ${title}`}/>
             }
             
         </Button>

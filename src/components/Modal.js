@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button, Box } from '@material-ui/core';
+import { Dialog, Typography, DialogContent, DialogContentText, DialogActions, Button, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
 const useStyle = makeStyles((theme) => ({
@@ -11,10 +11,12 @@ const useStyle = makeStyles((theme) => ({
         alignItems: 'center'
     },
     dialog: {
-        border: '1px solid black'
     },
     title: {
-
+        marginTop: '2vh',
+        marginLeft: '2vw',
+        fontSize: theme.typography.h5.fontSize,
+        fontWeight: theme.typography.h5.fontWeight,  
     }
 }));
 
@@ -29,7 +31,7 @@ const Modal = (props) => {
                 open={open}
                 onClose={handleClose}
             >
-                <DialogTitle className={classes.title}>{title}</DialogTitle>
+                <Typography className={classes.title}>{title}</Typography>
                 <DialogContent>
                     <DialogContentText>
                         {children}
