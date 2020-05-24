@@ -1,23 +1,35 @@
-import React from 'react';
-import { Box, Typography, Avatar } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Box, Typography, Avatar, TextField, Button, Input } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import ScrollAnimation from 'react-animate-on-scroll';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Link } from 'react-scroll';
+import { SwatchesPicker } from 'react-color';
 
+import { Icon, Modal } from '../../../components';
+import upload from '../../../assets/icons/upload.png';
+import edit from '../../../assets/icons/edit.png';
 import yael from '../../../assets/images/me1.jpg';
 
 const useStyle = makeStyles((theme) => ({
+    container: {
+        width: '100vw',
+        height: '100vh'
+    },
     content: {
         marginTop: '20vh',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
     },
-    me: {
+    avatarContainer: {
+        display: 'flex'
+    },
+    avatar: {
         width: 150,
         height: 150,
         marginBottom: '5vh',
+        marginRight: '1vw',
         [theme.breakpoints.down('xs')]: {
             width: 100,
             height: 100
@@ -34,15 +46,15 @@ const useStyle = makeStyles((theme) => ({
             fontSize: '40px',
         }
     },
-    whoAmIContainer: {
+    subHeaderContainer: {
         display: 'flex',
         alignItems: 'center',
-        marginTop: '8%',
+        marginTop: '4%',
         [theme.breakpoints.down('xs')]: {
             flexDirection: 'column'
         }
     },
-    whoAmI: {
+    subHeader: {
         whiteSpace: 'pre-wrap',
         color: theme.palette.white,
         fontWeight: theme.typography.subtitle2.fontWeight,
@@ -56,8 +68,12 @@ const useStyle = makeStyles((theme) => ({
             fontSize: '12px',
         }
     },
+    editButton: {
+        marginTop: '5vh',
+        backgroundColor: theme.palette.secondary.main
+    },
     icon: {
-        marginTop: '25vh',
+        marginTop: '15vh',
         height: 60,
         width: 60,
         cursor: 'pointer',
@@ -66,13 +82,64 @@ const useStyle = makeStyles((theme) => ({
             marginTop: '15vh',
         }
     },
+    inputs: {
+        display: 'flex',
+        flexDirection: 'column'
+    },
+    backgroundColorTitle: {
+        marginBottom: '2vh',
+        fontWeight: theme.typography.subtitle2.fontWeight,
+        fontFamily: theme.typography.h6.fontFamily,
+    },
+    input: {
+        marginTop: '3vw',
+        width: '30vw'
+    }
 }));
 
 const HomeScreen = (props) => {
     const classes = useStyle();
+    const [avatarImagePreview, setAvatarImagePreview] = useState(null);
+    const [avatarImage, setAvatarImage] = useState(null);
+    const [backgroundColor, setBackgroundColor] = useState('#00bcd4');
+    const [mainHeader, setMainHeader] = useState('Your Main Header');
+    const [subHeader, setSubHeader] = useState('A short cool description about you.. ');
+    const [openEditModel, setOpenEditModel] = useState(false);
+
+    const onFileChange = (event) => {
+        setAvatarImage(event.target.files[0]);
+        const url = window.URL.createObjectURL(event.target.files[0]);
+        setAvatarImagePreview(url);
+    };
+
+    const handleMainHeaderChange = (event) => {
+        setMainHeader(event.target.value);
+    };
+
+    const handleSubHeaderChange = (event) => {
+        setSubHeader(event.target.value);
+    };
+
+    const handleBackgroundColorChnage = (color) => {
+        setBackgroundColor(color.hex);
+    };
 
     return (
-        <Box>
+        <Box className={classes.container} style={{
+            backgroundColor: `${backgroundColor}`
+        }}>
+            <Modal 
+                open={openEditModel} 
+                handleClose={() =>  setOpenEditModel(false)}
+                title="Edit Header"
+            >   
+                <Box className={classes.inputs}>
+                    <Typography className={classes.backgroundColorTitle}>Background Color: </Typography>
+                    <SwatchesPicker onChangeComplete={handleBackgroundColorChnage} />
+                    <TextField className={classes.input} placeholder={mainHeader} onChange={handleMainHeaderChange} />
+                    <TextField className={classes.input} placeholder={subHeader} onChange={handleSubHeaderChange} multiline rowsMax={3}/>
+                </Box>
+            </Modal>
             <ScrollAnimation 
                 animateIn='fadeIn'
                 delay={1000}
@@ -81,35 +148,25 @@ const HomeScreen = (props) => {
                 animateOnce={true}
             >
                 <Box className={classes.content}>
-                    <Avatar className={classes.me} alt="Yael Lotan" src={yael} />
-                    <Typography className={classes.mainHeader} variant="h1">Hello, I am Yael</Typography>
-                    <Box className={classes.whoAmIContainer}>
+                    <Box className={classes.avatarContainer}>
+                        <Avatar className={classes.avatar} src={avatarImagePreview} />
+                        <Input type="file" disableUnderline onChange={onFileChange} />
+                    </Box>
+                    <Typography className={classes.mainHeader} variant="h1">{mainHeader}</Typography>
+                    <Box className={classes.subHeaderContainer}>
                         <ScrollAnimation
                             animateIn='fadeInDown'
                             delay={1500}
                             initiallyVisible={false}
                             animateOnce={true}
                         >
-                            <Typography className={classes.whoAmI} variant="h5">Fullstack Developer 👩🏻‍💻   </Typography>
-                        </ScrollAnimation>
-                        <ScrollAnimation
-                            animateIn='fadeInDown'
-                            delay={2000}
-                            initiallyVisible={false}
-                            animateOnce={true}
-                        >
-                            <Typography className={classes.whoAmI} variant="h5"> Sushi Lover 🍣   </Typography>
-                        </ScrollAnimation>
-                        <ScrollAnimation
-                            animateIn='fadeInDown'
-                            delay={2500}
-                            initiallyVisible={false}
-                            animateOnce={true}
-                        >
-                            <Typography className={classes.whoAmI} variant="h5"> Volleyball Player 🏐</Typography>  
+                            <Typography className={classes.subHeader} variant="h5">{subHeader}</Typography>
                         </ScrollAnimation>
                     </Box>          
                 </Box>
+                <Button variant="contained" className={classes.editButton} onClick={() =>  setOpenEditModel(true)}>
+                    <Icon icon={edit} text="Edit Header"/>
+                </Button>
                 <ScrollAnimation
                     animateIn='fadeInDown'
                     delay={2500}
