@@ -47,61 +47,24 @@ const DesktopNavigation = (props) => {
     const { screens, setCurrentScreen, currnetScreen } = props;
 
     const handleBackgroundColorChange = (color) => {
-        console.log(currentlyEditing);
         if (currentlyEditing === 'navigationItem') {
-            console.log('setNavigationItemColor(navigationItem)')
             setNavigationItemColor(color.hex);
         } else if (currentlyEditing === 'selectedNavigationItem') {
-            console.log('setSelectedNavigationItemColor(selectedNavigationItem)')
             setSelectedNavigationItemColor(color.hex);
         } else if (currentlyEditing === 'backgroundColor') {
-            console.log('setBackgroundColor(backgroundColor)')
             setBackgroundColor(color.hex);
         }
-        // switch (currentlyEditing) {
-        //     case 'navigationItem': {
-        //         console.log('editing backgroundColor')
-        //         setNavigationItemColor(color.hex);
-        //     }
-        //     case 'selectedNavigationItem': {
-        //         console.log('editing backgroundColor')
-        //         setSelectedNavigationItemColor(color.hex);
-        //     }
-        //     case 'backgroundColor': {
-        //         console.log('editing backgroundColor')
-        //         setBackgroundColor(color.hex);
-        //     } 
-        // }
     };
 
     const handleOpenModel = (type) => {
-        console.log(type)
         if (type === 'navigationItem') {
-            console.log('setCurrentlyEditing(navigationItem)')
             setCurrentlyEditing('navigationItem');
         } else if (type === 'selectedNavigationItem') {
-            console.log('setCurrentlyEditing(selectedNavigationItem)')
             setCurrentlyEditing('selectedNavigationItem');
         } else if (type === 'backgroundColor') {
-            console.log('setCurrentlyEditing(backgroundColor)')
             setCurrentlyEditing('backgroundColor');
         }
-        // switch(type) {
-        //     case 'navigationItem': {
-        //         console.log('setCurrentlyEditing(navigationItem)')
-        //         setCurrentlyEditing('navigationItem');
-        //     }
-        //     case 'selectedNavigationItem': {
-        //         console.log('setCurrentlyEditing(selectedNavigationItem)')
-        //         setCurrentlyEditing('selectedNavigationItem');
-        //     }
-        //     case 'backgroundColor': {
-        //         console.log('setCurrentlyEditing(backgroundColor)')
-        //         setCurrentlyEditing('backgroundColor');
-        //     }
 
-            
-        // }
         setOpenColorsModal(true);
     };
 
