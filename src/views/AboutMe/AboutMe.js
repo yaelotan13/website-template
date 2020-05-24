@@ -1,39 +1,65 @@
-import React from 'react';
-import { Box } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Box, Typography, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 
-import { DevLanguagesLogos, Educations } from './components';
-import { SubTitle } from '../../components';
+import { Modal, ActionButton } from '../../components';
 
 const useStyle = makeStyles((theme) => ({
     container: {
         marginTop: '2%',
         padding: '6%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center'
     },
-    educationContainer: {
-        height: '50vh',
-        [theme.breakpoints.down('xs')]: {
-            height: '100vh',
-        }
+    header: {
+        fontSize: 24,
+        fontWeight: 600,
+        fontFamily: theme.typography.h3.fontFamily,
+        marginBottom: '2vh'
     },
-    skillsContainer: {
-        marginTop: '5vh'
+    content: {
+        fontSize: 16,
+        fontWeight: 400,
+        fontFamily: theme.typography.h3.fontFamily,
+        marginTop: '3vh'
+    },
+    headerInput: {
+        width: '35vw',
+        marginBottom: '3vh'
+    },
+    contentInput: {
+        width: '35vw',
+        marginBottom: '5vh',
+        whiteSpace: 'pre'
     }
 }));
 
 const AboutMe = (props) => {
     const classes = useStyle();
+    const [content, setContent] = useState('All the interesting info about you goes here');
+    const [header, setHeader] = useState('About Me');
+    const [open, setOpen] = useState(false);
+
+    const handleContentChange = (event) => {
+        setContent(event.target.value);
+    };
+
+    const handleHeaderChange = (event) => {
+        setHeader(event.target.value);
+    };
 
     return (
         <Box className={classes.container}>
-            <Box className={classes.educationContainer}>
-                <SubTitle delay={200} title="Education" />
-                <Educations />
+            <Modal open={open} handleClose={() => setOpen(false)} title="Edit Content">
+                <TextField className={classes.headerInput} value={header} variant="outlined" onChange={handleHeaderChange} />
+                <TextField className={classes.contentInput} value={content} multiline rowsMax={10} onChange={handleContentChange} />
+            </Modal>
+            <Box>
+                <Typography className={classes.header}>{header}</Typography>
+                <ActionButton actionType="edit" handleClicked={() => setOpen(true)} style="contained" title="Content" />
             </Box>
-            <Box className={classes.skillsContainer}>
-                <SubTitle delay={500} title="Skills" />
-                <DevLanguagesLogos />
-            </Box>
+            <Typography className={classes.content}>{content}</Typography>
         </Box>
     )
 };
