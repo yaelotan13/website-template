@@ -56,6 +56,7 @@ const useStyle = makeStyles((theme) => ({
         color: theme.palette.white,
         fontWeight: theme.typography.subtitle2.fontWeight,
         fontFamily: theme.typography.h6.fontFamily,
+        marginBottom: '5vh',
         [theme.breakpoints.between('sm', 'xl')]: {
             fontSize: '22px',
             
@@ -157,7 +158,7 @@ const HomeScreen = (props) => {
                         </ScrollAnimation>
                     </Box>          
                 </Box>
-                <ActionButton actionType="edit" handleClicked={() =>  setOpenEditModel(true)} />
+                <ActionButton actionType="edit" style="contained" handleClicked={() =>  setOpenEditModel(true)} title="Header" />
                 <ScrollAnimation
                     animateIn='fadeInDown'
                     delay={2500}
