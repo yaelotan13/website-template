@@ -11,8 +11,6 @@ const useStyle = makeStyles((theme) => ({
         alignItems: 'center'
     },
     dialog: {
-        // width: '40vw',
-        // height: '50vh',
         border: '1px solid black'
     },
     title: {
