@@ -12,6 +12,7 @@
     "animate.css": "^4.1.0",
     "react": "^16.13.1",
     "react-animate-on-scroll": "^2.1.5",
+    "react-color": "^2.18.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "react-scroll": "^1.7.16"
